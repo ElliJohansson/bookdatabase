@@ -25,5 +25,6 @@ def add_book():
 @app.route("/book/<name>", methods=["POST", "GET"])       
 def book(name):
     sql = "SELECT id, name, year, author FROM books WHERE name=:name"
-    result = db.session.execute(sql, {"name":name})
-    return result.fetchone()
+    result = db.session.execute(text(sql), {"name":name})
+    book = result.fetchone()
+    return f"{book}"

@@ -4,7 +4,7 @@ Book count: {{count}}
 <hr>
 
 {%for book in books%}
-<li>{{book.name}}</li>
+<a href="/book/{{book.name}}">{{book.name}}</a>
 <hr>
 {%endfor%}
 <a href="/add_book">Add book</a>
