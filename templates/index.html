@@ -1,0 +1,13 @@
+<title>Index</title>
+
+Book count: {{count}}
+<hr>
+
+{%for book in books%}
+<li>{{book.name}}</li>
+<hr>
+{%endfor%}
+<a href="/add_book">Add book</a>
+<br>
+<p>
+
