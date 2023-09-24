@@ -20,16 +20,16 @@ The site is used to store and sort through information about books.
 
 Requires psql.
 
- ```git clone git@github.com:ElliJohansson/bookdatabase.git```
+ 1. ```git clone git@github.com:ElliJohansson/bookdatabase.git```
  
- ```cd bookdatabase```
+ 2. ```cd bookdatabase```
 
- ```python3 -m venv venv```
+ 3. ```python3 -m venv venv```
 
- ```source venv/bin/activate```
+ 4. ```source venv/bin/activate```
  
- ```pip install -r requirements.txt```
+5.  ```pip install -r requirements.txt```
 
-```psql < schema.sql```
+6. ```psql < schema.sql```
 
- ```flask run```
+7.  ```flask run```
