@@ -1,7 +1,9 @@
 <h1> {{book.name}} </h1>
 
 <p><b> Publication year:</b> {{book.year}}</p>
-<p><b> Author:</b> {{book.author}}</p><br>
+<p><b> Author:</b> {{book.author}}</p>
+<p><b> Genre(s):</b> {{ ', '.join(genres) }}</p>
+
 
 <p><b>Synopsis:</b></p>
 <p>{{book.synopsis}}</p>

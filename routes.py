@@ -1,5 +1,6 @@
 from app import app
 from flask import request, render_template, redirect, session
+import secrets
 import books
 import users
 
@@ -11,20 +12,32 @@ def index():
 @app.route("/add_book", methods=["GET", "POST"])
 def add_book():
     if request.method == "GET":
-        return render_template("add_book.html")
+        genre_list = books.genres()
+        return render_template("add_book.html", genre_list=genre_list)
     
     if request.method == "POST":
         name = request.form["name"]
         year = request.form["year"]
         author = request.form["author"]
         synopsis = request.form["synopsis"]
+        genres = request.form.getlist("genres[]")
+
         books.add_book(name, year, author, synopsis)
+        book = books.book(name)
+        genre_list = books.genres()
+
+        for selected_genre in genres:
+            for genre in genre_list:
+                if selected_genre == genre.name:
+                    books.add_genres(book.id, genre.id)
+
         return redirect("/")
     
 @app.route("/book/<name>", methods=["POST", "GET"])       
 def book(name):
     book = books.book(name)
-    return render_template("book_info.html", book=book)
+    genres = books.get_genres(book.id)
+    return render_template("book_info.html", book=book, genres=genres)
 
 @app.route("/login",methods=["GET", "POST"])
 def login():
@@ -40,14 +53,12 @@ def login():
 
         if login_check is True:
             session["username"] = username
+            session["csrf_token"] = secrets.token_hex(16)
+
             return redirect("/")
         else:
             error = login_check
             return render_template("login.html", error=error)
-
-        
-
-
 
 @app.route("/logout")
 def logout():

@@ -1,11 +1,20 @@
 <form action="/add_book" method="POST">
-    <p>Book name: <br>
+    <p><b>Book name:</b> <br>
     <input type="text" name="name"></input></p>
-    <p>Publication year:<br>
+    <p><b>Publication year:</b><br>
     <input type="int" name="year"></input></p>
-    <p>Author:<br>
-    <input type="text" name="author"></input></p><br>
-    <p>Synopsis:<br>
+    <p><b>Author</b><br>
+    <input type="text" name="author"></input></p>
+
+    <label for="genres"><b>Select genre(s):</b></label> <br>
+    <select name="genres[]" multiple>
+        {% for genre in genre_list %}
+        <option value="{{genre.name}}">{{ genre.name }}</option>
+        {% endfor %}
+    </select>
+    <p>Hold down the Ctrl or Command button to select multiple genres.</p>
+
+    <p><b>Synopsis:</b><br>
     <textarea name="synopsis" rows="3" cols="20"></textarea></p>
 
     <input type="submit" value="Submit">

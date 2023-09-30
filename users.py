@@ -1,5 +1,6 @@
 from app import db
 from sqlalchemy import text
+from flask import session, request, abort
 from werkzeug.security import check_password_hash, generate_password_hash
 
 def login(username, password):
@@ -23,3 +24,8 @@ def register(username, password):
     sql = "INSERT INTO users (username, password) VALUES (:username, :password)"
     db.session.execute(text(sql), {"username":username, "password":hash_value})
     db.session.commit()
+
+
+def csrf_check():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)

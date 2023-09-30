@@ -6,6 +6,7 @@
     <p>Password:<br>
     <input type="password" name="password"></p>
     <input type="submit" value="Login">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
     
     {%  if  error %}
