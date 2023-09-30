@@ -1,5 +1,4 @@
 from app import db
-from flask import request, session
 from sqlalchemy import text
 
 def all_books():
