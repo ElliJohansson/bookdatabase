@@ -15,23 +15,9 @@ Book count: {{count}}
 <p>You are logged in as {{ session.username }}</p>
 <a href="/add_book">Add book</a> <br>
 <a href="/logout">Log out</a>
+
 {% else %}
-
-
-<p>Log in or <a href="/register">register</a> to add a book.</p> 
-<br>
-
-<form action="/login" method="POST">
-<p>Username:<br>
-<input type="text" name="username"></p>
-<p>Password:<br>
-<input type="password" name="password"></p>
-<input type="submit" value="Login">
-</form>
+<p><a href="/login">Log in</a> or <a href="/register">register</a> to add a book.</p> 
 {% endif %}
-
-{%  if  error %}
-<p> <b>Error:</b> {{error}}</p>
-{% endif %} 
 
 
