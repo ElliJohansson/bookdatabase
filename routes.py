@@ -1,11 +1,11 @@
 from app import db, app
-from flask import request, render_template, redirect, session
+from flask import request, render_template, redirect, flash, session
 from sqlalchemy import text
 from werkzeug.security import check_password_hash, generate_password_hash
 
 @app.route("/")
 def index():
-    result = db.session.execute(text("SELECT name, year, author FROM books"))
+    result = db.session.execute(text("SELECT name FROM books"))
     books = result.fetchall()
     return render_template("index.html", count=len(books), books=books)
 
@@ -33,10 +33,27 @@ def book(name):
 
 @app.route("/login",methods=["POST"])
 def login():
+    error = None
     username = request.form["username"]
     password = request.form["password"]
-    session["username"] = username
-    return redirect("/")
+
+    sql = "SELECT id, password FROM users WHERE username=:username"
+    result = db.session.execute(text(sql), {"username":username})
+    user = result.fetchone()
+    if not user:
+        error = "Invalid username"
+    else:
+        hash_value = user.password
+        if check_password_hash(hash_value, password):
+            session["username"] = username
+            return redirect("/")
+        else:
+            error = "Invalid password"
+
+    bookresult = db.session.execute(text("SELECT name FROM books"))
+    books = bookresult.fetchall()   
+    return render_template("index.html", error=error, count=len(books), books=books)
+
 
 @app.route("/logout")
 def logout():
