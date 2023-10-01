@@ -4,7 +4,8 @@ CREATE TABLE books (
     name TEXT,
     year INT,
     author TEXT,
-    synopsis TEXT
+    synopsis TEXT,
+    cover TEXT
 
 );
 
@@ -32,18 +33,20 @@ CREATE TABLE book_genres (
 );
 
 INSERT INTO genres (name) VALUES
-('Action & Adventure Fiction'),
+('Action & Adventure'),
 ('Art & Photography'),
 ('Biography/Autobiography'),
 ('Children´s Literature'),
 ('Cookbook'),
 ('Essay'),
 ('Fantasy'),
+('Fiction'),
 ('Graphic Novel'),
 ('History'),
 ('Horror'),
 ('Humor'),
 ('Mystery'),
+('Non-Fiction'),
 ('Philosophy'),
 ('Poetry'),
 ('Parenting'),

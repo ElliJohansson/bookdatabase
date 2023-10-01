@@ -1,6 +1,11 @@
 <title>Home</title>
 
-Book count: {{count}}
+<form action="/results" method="GET">
+    <input type="text" name="query">
+    <br>
+    <input type="submit" value="Search">
+    </form>
+    
 <hr>
 
 {%for book in books%}
@@ -19,5 +24,7 @@ Book count: {{count}}
 {% else %}
 <p><a href="/login">Log in</a> or <a href="/register">register</a> to add a book.</p> 
 {% endif %}
+
+
 
 

@@ -1,9 +1,16 @@
 <h1> {{book.name}} </h1>
+<img src="/{{book.cover}}" alt="{{book.name}} Cover"
+width="20%"
+heigth="auto"/>
 
 <p><b> Publication year:</b> {{book.year}}</p>
 <p><b> Author:</b> {{book.author}}</p>
 <p><b> Genre(s):</b> {{ ', '.join(genres) }}</p>
 
 
-<p><b>Synopsis:</b></p>
-<p>{{book.synopsis}}</p>
+<p><b> Synopsis:</b><br>
+{{book.synopsis}}</p>
+
+<br><br>
+
+<p><a href="/">Home</a> </p>

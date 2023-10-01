@@ -1,5 +1,7 @@
+import os
 from app import app
 from flask import request, render_template, redirect, session
+from werkzeug.utils import secure_filename
 import secrets
 import books
 import users
@@ -22,7 +24,19 @@ def add_book():
         synopsis = request.form["synopsis"]
         genres = request.form.getlist("genres[]")
 
-        books.add_book(name, year, author, synopsis)
+        cover = request.files ["cover"]
+        if cover != None:
+            upload_folder = "static"
+            os.makedirs(upload_folder, exist_ok=True)
+
+            filename = secure_filename(cover.filename)
+            cover.save(os.path.join(upload_folder, filename))
+
+            cover_path = os.path.join(upload_folder, filename)
+        else:
+            cover = None
+
+        books.add_book(name, year, author, synopsis, cover_path)
         book = books.book(name)
         genre_list = books.genres()
 
@@ -84,3 +98,8 @@ def register():
     
     return render_template("register.html", error=error)
 
+
+@app.route("/results", methods=["GET"])
+def results():
+    search_results = books.search()
+    return render_template("results.html", search_results=search_results)

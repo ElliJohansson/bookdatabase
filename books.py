@@ -1,5 +1,6 @@
 from app import db
 from sqlalchemy import text
+from flask import request
 
 def all_books():
     sql = "SELECT name FROM books"
@@ -7,13 +8,13 @@ def all_books():
     return result.fetchall()
 
 def book(name):
-    sql = "SELECT id, name, year, author, synopsis FROM books WHERE name=:name"
+    sql = "SELECT id, name, year, author, synopsis, cover FROM books WHERE name=:name"
     result = db.session.execute(text(sql), {"name":name})
     return result.fetchone()
 
-def add_book(name:str, year:int, author:str, synopsis:str):
-    sql = "INSERT INTO books (name, year, author, synopsis) VALUES (:name, :year, :author, :synopsis)"
-    db.session.execute(text(sql), {"name":name, "year":year, "author":author, "synopsis":synopsis})
+def add_book(name:str, year:int, author:str, synopsis:str, cover_path):
+    sql = "INSERT INTO books (name, year, author, synopsis, cover) VALUES (:name, :year, :author, :synopsis, :cover)"
+    db.session.execute(text(sql), {"name":name, "year":year, "author":author, "synopsis":synopsis, "cover":cover_path})
     db.session.commit()
 
 def genres():
@@ -31,3 +32,10 @@ def get_genres(book_id):
     result = db.session.execute(text(sql), {"book_id":book_id})
     genres = [row[0] for row in result.fetchall()]
     return genres
+
+def search():
+    query = request.args["query"]
+    sql = "SELECT name FROM books WHERE LOWER(name) LIKE LOWER(:query)"
+    result = db.session.execute(text(sql), {"query":"%"+query+"%"})
+    search_results = [row[0] for row in result.fetchall()]
+    return search_results

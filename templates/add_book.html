@@ -1,10 +1,12 @@
-<form action="/add_book" method="POST">
+<form action="/add_book" method="POST" enctype="multipart/form-data">
     <p><b>Book name:</b> <br>
-    <input type="text" name="name"></input></p>
+        <input type="text" name="name"></input></p>
+
     <p><b>Publication year:</b><br>
-    <input type="int" name="year"></input></p>
-    <p><b>Author</b><br>
-    <input type="text" name="author"></input></p>
+        <input type="int" name="year"></input></p>
+
+    <p><b>Author:</b><br>
+        <input type="text" name="author"></input></p>
 
     <label for="genres"><b>Select genre(s):</b></label> <br>
     <select name="genres[]" multiple>
@@ -15,7 +17,10 @@
     <p>Hold down the Ctrl or Command button to select multiple genres.</p>
 
     <p><b>Synopsis:</b><br>
-    <textarea name="synopsis" rows="3" cols="20"></textarea></p>
+        <textarea name="synopsis" rows="3" cols="20"></textarea></p>
+    
+    <p><b>Cover art:</b>
+        <input type="file" id="myFile" name="cover"></p>
 
     <input type="submit" value="Submit">
 </form>
