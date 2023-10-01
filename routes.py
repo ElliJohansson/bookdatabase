@@ -67,6 +67,8 @@ def login():
 
         if login_check is True:
             session["username"] = username
+            if users.is_admin(username):
+                session["admin"] = username
             session["csrf_token"] = secrets.token_hex(16)
 
             return redirect("/")
@@ -77,6 +79,7 @@ def login():
 @app.route("/logout")
 def logout():
     del session["username"]
+    del session["admin"]
     return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
@@ -103,3 +106,9 @@ def register():
 def results():
     search_results = books.search()
     return render_template("results.html", search_results=search_results)
+
+@app.route("/delete", methods=["POST"])
+def delete():
+    id = request.form["id"]
+    books.delete_book(id)
+    return redirect("/")

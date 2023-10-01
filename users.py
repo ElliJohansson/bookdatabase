@@ -20,12 +20,21 @@ def login(username, password):
         
 
 def register(username, password):
+    is_admin = False
     hash_value = generate_password_hash(password)
-    sql = "INSERT INTO users (username, password) VALUES (:username, :password)"
-    db.session.execute(text(sql), {"username":username, "password":hash_value})
+    sql = "INSERT INTO users (username, password, is_admin) VALUES (:username, :password, :is_admin)"
+    db.session.execute(text(sql), {"username":username, "password":hash_value, "is_admin":is_admin})
     db.session.commit()
 
 
 def csrf_check():
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
+
+def is_admin(username):
+    sql = "SELECT * FROM users WHERE username =:username AND is_admin = True"
+    result = db.session.execute(text(sql), {"username":username})
+    if result:        
+        return True
+    else:
+        return False

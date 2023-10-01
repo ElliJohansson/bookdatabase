@@ -13,4 +13,12 @@ heigth="auto"/>
 
 <br><br>
 
+{% if session.admin %}
+<form action="/delete" method="POST">
+    <input type="hidden" value="{{book.id}}" name="id">
+    <input type="submit" value="Delete book"></form>
+{%endif%}
+
+
+
 <p><a href="/">Home</a> </p>

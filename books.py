@@ -36,7 +36,6 @@ def get_genres(book_id):
 def search():
     query = request.args["query"]
     search_option = request.args.getlist("search_option")
-    print(search_option)
 
     if len(search_option)==1:
         if search_option[0] == "name":
@@ -50,3 +49,11 @@ def search():
     result = db.session.execute(text(sql), {"query":"%"+query+"%"})        
     search_results = [row[0] for row in result.fetchall()]
     return search_results
+
+def delete_book(id):
+    sql = "DELETE FROM book_genres WHERE book_id=:id"
+    db.session.execute(text(sql), {"id":id})
+    db.session.commit()
+    sql = "DELETE FROM books WHERE id=:id"
+    db.session.execute(text(sql), {"id":id})
+    db.session.commit()
