@@ -4,13 +4,13 @@ The site is used to store and sort through information about books.
 
 ### Features at the moment
 
-- Users can create new accounts
-- Users can add books to the site (title, publication year, author, synopsis)
+- Users can create new accounts and log in
+- Users can add books to the site (title, publication year, author, synopsis, genre)
 - Users can view books on the site
+- Users can search a book by name
 
 ### Features
 
-- Users can log in
 - Admins can remove books and reviews from the site
 - Users can review books on the site and view the average rating
 - Users can sort the books by rating
