@@ -35,7 +35,18 @@ def get_genres(book_id):
 
 def search():
     query = request.args["query"]
-    sql = "SELECT name FROM books WHERE LOWER(name) LIKE LOWER(:query)"
-    result = db.session.execute(text(sql), {"query":"%"+query+"%"})
+    search_option = request.args.getlist("search_option")
+    print(search_option)
+
+    if len(search_option)==1:
+        if search_option[0] == "name":
+            sql = "SELECT name FROM books WHERE LOWER(name) LIKE LOWER(:query)"
+        elif search_option[0] == "synopsis":
+            sql = "SELECT name FROM books WHERE LOWER(synopsis) LIKE LOWER(:query)"
+    else:
+        sql = "SELECT name FROM books WHERE LOWER(name) LIKE LOWER(:query) OR LOWER(synopsis) LIKE LOWER(:query)"
+
+
+    result = db.session.execute(text(sql), {"query":"%"+query+"%"})        
     search_results = [row[0] for row in result.fetchall()]
     return search_results
