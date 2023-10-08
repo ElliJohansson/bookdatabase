@@ -5,16 +5,16 @@ The site is used to store and sort through information about books.
 ### Features at the moment
 
 - Users can create new accounts and log in
-- Users can add books to the site (title, publication year, author, synopsis, genre(s), cover art)
+- Logged in users can add books to the site (title, publication year, author, synopsis, genre(s), cover art)
 - Users can view books on the site
 - Users can search a book by a word in the name, synopsis, or both
 - Admins can remove books from the site
-- Users can review books on the site (rating & written review)
-
+- Logged in users can review books on the site (rating & written review)
+- Users can view individual ratings and reviews, as well as the average rating, on the book's site
+  
 ### Features
 
 - Admins can remove reviews from the site
-- Users can view the average rating
 - Users can sort the books by rating
 - Users can filter the books by genre or author
 
@@ -42,3 +42,14 @@ Requires psql.
 7. ```psql < schema.sql```
 
 8.  ```flask run```
+
+***
+
+To make an admin account, first create an account. Then edit the *users* SQL table in ```psql``` as follows:
+ 
+ ```
+   UPDATE users
+   SET is_admin = True
+   WHERE username = '<username>';
+   ```
+  Then log out and back in.
