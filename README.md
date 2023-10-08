@@ -9,11 +9,12 @@ The site is used to store and sort through information about books.
 - Users can view books on the site
 - Users can search a book by a word in the name, synopsis, or both
 - Admins can remove books from the site
+- Users can review books on the site
 
 ### Features
 
 - Admins can remove reviews from the site
-- Users can review books on the site and view the average rating
+- Users can view the average rating
 - Users can sort the books by rating
 - Users can filter the books by genre or author
 
