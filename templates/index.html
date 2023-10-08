@@ -1,4 +1,4 @@
-<title>Home</title>
+<title>Book DB</title>
 
 
 <form action="/results" method="GET">
@@ -23,8 +23,12 @@
 
 {% if session.username %}
 <p>You are logged in as {{ session.username }}</p>
-<a href="/add_book">Add book</a> <br>
-<a href="/logout">Log out</a>
+<form action="/add_book">
+    <input type="submit" value="Add book"/>
+</form>
+<form action="/logout">
+    <input type="submit" value="Log out"/>
+</form>
 
 {% else %}
 <p><a href="/login">Log in</a> or <a href="/register">register</a> to add a book.</p> 

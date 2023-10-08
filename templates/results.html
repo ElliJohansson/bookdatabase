@@ -1,13 +1,24 @@
-<title>Search results</title>
+<title>Book DB</title>
 
 <form action="/results" method="GET">
-    <input type="text" name="query">
-    <br>
+    <p>Filter search:
+        <input type="checkbox" name="search_option" value="name"> title
+        <input type="checkbox" name="search_option" value="synopsis"> synopsis
+    </p>
     <input type="submit" value="Search">
+    <input type="text" name="query">
     </form>
+
+<h2>Search results on "{{query}}"</h2>
 
 <hr>
 {%for result in search_results%}
 <a href="/book/{{result}}">{{result}}</a>
 <hr>
 {%endfor%}
+
+<br>
+
+<form action="/">
+    <input type="submit" value="Home"/>
+</form>

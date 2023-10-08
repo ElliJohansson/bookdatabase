@@ -33,10 +33,7 @@ def get_genres(book_id):
     genres = [row[0] for row in result.fetchall()]
     return genres
 
-def search():
-    query = request.args["query"]
-    search_option = request.args.getlist("search_option")
-
+def search(query, search_option):
     if len(search_option)==1:
         if search_option[0] == "name":
             sql = "SELECT name FROM books WHERE LOWER(name) LIKE LOWER(:query)"
@@ -74,6 +71,6 @@ def average_rating(reviews):
     for review in reviews:
         ratings += review.rating
         
-    avg_rating = ratings/len(reviews)
+    avg_rating = "{:.2f}".format(ratings/len(reviews))
     return avg_rating
     

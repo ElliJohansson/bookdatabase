@@ -1,4 +1,4 @@
-<title>{{book.name}}</title>
+<title>Book DB: {{book.name}}</title>
 
 <h1> {{book.name}} </h1>
 
@@ -22,7 +22,12 @@ heigth="auto"/>
 <p><b> Synopsis:</b><br>
 {{book.synopsis}}</p>
 
+{%if average_rating != 0 %}
 <h3>Average rating: {{average_rating}}/5</h3>
+{%else%}
+<h3>Average rating:</h3>
+<p>This book hasn't been reviewed yet.</p>
+{%endif%}
 
 {% if session.username %}
 <form action="/add_review/{{book.name}}">
@@ -40,4 +45,7 @@ heigth="auto"/>
 
 <hr>
 {%endfor%}
-<p><a href="/">Home</a> </p>
+<br>
+<form action="/">
+    <input type="submit" value="Home"/>
+</form>

@@ -1,4 +1,6 @@
-<title>Review {{book_info.name}}</title>
+<title>Book DB</title>
+
+<h2>Review {{book_info.name}}</h2>
 
 <form action="/add_review/{{book_info.name}}" method="POST">
 
@@ -31,3 +33,7 @@
 
 </form>
 
+
+<form action="/book/{{book_info.name}}">
+    <input type="submit" value="Cancel"/>
+</form>
