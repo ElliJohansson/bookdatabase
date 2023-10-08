@@ -1,4 +1,15 @@
+<title>{{book.name}}</title>
+
 <h1> {{book.name}} </h1>
+
+{% if session.admin %}
+
+<form action="/delete" method="POST">
+    <input type="hidden" value="{{book.id}}" name="id">
+    <input type="submit" value="Delete book"></form>
+<br>
+{% endif %}
+
 <img src="/{{book.cover}}" alt="{{book.name}} Cover"
 width="20%"
 heigth="auto"/>
@@ -11,14 +22,21 @@ heigth="auto"/>
 <p><b> Synopsis:</b><br>
 {{book.synopsis}}</p>
 
-<br><br>
+<br>
 
-{% if session.admin %}
-<form action="/delete" method="POST">
-    <input type="hidden" value="{{book.id}}" name="id">
-    <input type="submit" value="Delete book"></form>
-{%endif%}
+{% if session.username %}
+<form action="/add_review/{{book.name}}">
+    <input type="submit" value="Leave a review"/>
+</form>
 
+{% endif %}
 
+<hr>
+{% for review in reviews %}
+<p><b>Rating:</b> {{review.rating}}/5</p>
+<p><b>Review:</b> {{review.review}}</p>
+<p>- {{review.username}}</p>
 
+<hr>
+{%endfor%}
 <p><a href="/">Home</a> </p>

@@ -57,3 +57,14 @@ def delete_book(id):
     sql = "DELETE FROM books WHERE id=:id"
     db.session.execute(text(sql), {"id":id})
     db.session.commit()
+
+def add_review(username, book_id, rating, review):
+    sql = "INSERT INTO reviews (username, book_id, rating, review) VALUES (:username, :book_id, :rating, :review)"
+    db.session.execute(text(sql), {"username":username, "book_id":book_id, "rating":rating, "review":review})
+    db.session.commit()
+
+def get_reviews(book_id):
+    sql = "SELECT R.id, R.username, R.book_id, R.rating, R.review FROM reviews R, books B WHERE R.book_id = B.id AND B.id=:book_id"
+    result = db.session.execute(text(sql), {"book_id":book_id})
+    reviews = result.fetchall()
+    return reviews

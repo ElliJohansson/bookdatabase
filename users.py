@@ -32,9 +32,20 @@ def csrf_check():
         abort(403)
 
 def is_admin(username):
-    sql = "SELECT * FROM users WHERE username =:username AND is_admin = True"
+    sql = "SELECT * FROM users WHERE username=:username AND is_admin = True"
     result = db.session.execute(text(sql), {"username":username})
-    if result:        
+    user = result.fetchone()
+    if user:
         return True
     else:
         return False
+    
+def username_to_id(username):
+    sql = "SELECT id FROM users WHERE username=:username"
+    result = db.session.execute(text(sql), {"username":username})
+    return result.fetchone()
+    
+def id_to_username(id):
+    sql = "SELECT username FROM users WHERE id=:id"
+    result = db.session.execute(text(sql), {"id":id})
+    return result.fetchone()

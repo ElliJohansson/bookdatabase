@@ -45,13 +45,14 @@ def add_book():
                 if selected_genre == genre.name:
                     books.add_genres(book.id, genre.id)
 
-        return redirect("/")
+        return redirect(f"/book/{name}")
     
 @app.route("/book/<name>", methods=["POST", "GET"])       
 def book(name):
     book = books.book(name)
     genres = books.get_genres(book.id)
-    return render_template("book_info.html", book=book, genres=genres)
+    reviews = sorted(books.get_reviews(book.id), reverse=True)
+    return render_template("book_info.html", book=book, genres=genres, reviews=reviews)
 
 @app.route("/login",methods=["GET", "POST"])
 def login():
@@ -79,7 +80,9 @@ def login():
 @app.route("/logout")
 def logout():
     del session["username"]
-    del session["admin"]
+    if session.get("admin") == True:
+        del session["admin"]
+
     return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
@@ -112,3 +115,17 @@ def delete():
     id = request.form["id"]
     books.delete_book(id)
     return redirect("/")
+
+@app.route("/add_review/<name>", methods=["GET", "POST"])
+def add_review(name):
+    book_info = books.book(name)
+    if request.method == "GET":
+        return render_template("add_review.html", book_info=book_info)
+    
+    if request.method == "POST":
+        rating = int(request.form["rating"])
+        review = request.form["review"]
+
+        username = session["username"]
+        books.add_review(username, book_info.id, rating, review)
+        return redirect(f"/book/{name}")

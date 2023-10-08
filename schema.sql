@@ -33,6 +33,16 @@ CREATE TABLE book_genres (
     
 );
 
+CREATE TABLE reviews (
+
+    id SERIAL PRIMARY KEY,
+    username TEXT,
+    book_id INT,
+    rating INT,
+    review TEXT
+    
+);
+
 INSERT INTO genres (name) VALUES
 ('Action & Adventure'),
 ('Art & Photography'),
