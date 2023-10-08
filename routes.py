@@ -80,7 +80,8 @@ def login():
 @app.route("/logout")
 def logout():
     del session["username"]
-    if session.get("admin") == True:
+    if "admin" in session:
+        print("test")
         del session["admin"]
 
     return redirect("/")
