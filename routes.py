@@ -96,15 +96,18 @@ def register():
         return render_template("register.html", error=error)
     
     if request.method == "POST":
+        all_usernames = users.get_all_usernames()
         username = request.form["username"]
         password = request.form["password"]
         password2 = request.form["password2"]
-        if password == password2:
+        if username in all_usernames:
+            error = "Username has already been taken"
+        elif password != password2:
+            error = "Passwords do not match"
+        else:
             users.register(username, password)
             session["username"] = username
             return redirect("/")
-        else:
-            error = "Passwords do not match"
     
     return render_template("register.html", error=error)
 

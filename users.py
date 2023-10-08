@@ -40,12 +40,8 @@ def is_admin(username):
     else:
         return False
     
-def username_to_id(username):
-    sql = "SELECT id FROM users WHERE username=:username"
-    result = db.session.execute(text(sql), {"username":username})
-    return result.fetchone()
+def get_all_usernames():
+    sql = "SELECT username FROM users"
+    result = db.session.execute(text(sql))
+    return [row[0] for row in result.fetchall()]
     
-def id_to_username(id):
-    sql = "SELECT username FROM users WHERE id=:id"
-    result = db.session.execute(text(sql), {"id":id})
-    return result.fetchone()
