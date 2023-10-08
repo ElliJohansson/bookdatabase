@@ -68,3 +68,12 @@ def get_reviews(book_id):
     result = db.session.execute(text(sql), {"book_id":book_id})
     reviews = result.fetchall()
     return reviews
+
+def average_rating(reviews):
+    ratings = 0
+    for review in reviews:
+        ratings += review.rating
+        
+    avg_rating = ratings/len(reviews)
+    return avg_rating
+    

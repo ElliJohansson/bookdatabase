@@ -22,7 +22,7 @@ heigth="auto"/>
 <p><b> Synopsis:</b><br>
 {{book.synopsis}}</p>
 
-<br>
+<h3>Average rating: {{average_rating}}/5</h3>
 
 {% if session.username %}
 <form action="/add_review/{{book.name}}">
@@ -30,6 +30,7 @@ heigth="auto"/>
 </form>
 
 {% endif %}
+
 
 <hr>
 {% for review in reviews %}

@@ -52,7 +52,8 @@ def book(name):
     book = books.book(name)
     genres = books.get_genres(book.id)
     reviews = sorted(books.get_reviews(book.id), reverse=True)
-    return render_template("book_info.html", book=book, genres=genres, reviews=reviews)
+    average_rating = books.average_rating(reviews)
+    return render_template("book_info.html", book=book, genres=genres, reviews=reviews, average_rating=average_rating)
 
 @app.route("/login",methods=["GET", "POST"])
 def login():
