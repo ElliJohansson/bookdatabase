@@ -13,8 +13,9 @@ def index():
 
 @app.route("/add_book", methods=["GET", "POST"])
 def add_book():
+    genre_list = books.genres()
+    
     if request.method == "GET":
-        genre_list = books.genres()
         return render_template("add_book.html", genre_list=genre_list)
     
     if request.method == "POST":
@@ -25,7 +26,13 @@ def add_book():
         genres = request.form.getlist("genres[]")
 
         cover = request.files ["cover"]
-        if cover != None:
+
+        print(type(year))
+        if not year.isnumeric():
+            error = "Publication year must be a number."
+            return render_template("add_book.html", error=error, genre_list=genre_list)
+
+        if cover.filename != "":
             upload_folder = "static"
             os.makedirs(upload_folder, exist_ok=True)
 
@@ -34,7 +41,7 @@ def add_book():
 
             cover_path = os.path.join(upload_folder, filename)
         else:
-            cover = None
+            cover_path = None
 
         books.add_book(name, year, author, synopsis, cover_path)
         book = books.book(name)
@@ -54,7 +61,7 @@ def book(name):
     reviews = sorted(books.get_reviews(book.id), reverse=True)
     average_rating = 0
     if len(reviews) > 0:
-        average_rating = books.average_rating(reviews)
+        average_rating = books.average_rating(book.id)
     return render_template("book_info.html", book=book, genres=genres, reviews=reviews, average_rating=average_rating)
 
 @app.route("/login",methods=["GET", "POST"])
