@@ -71,7 +71,6 @@ def delete_review(id):
     db.session.commit()
 
 def average_rating(book_id):
-    print(book_id)
     sql = "SELECT ROUND(AVG(rating), 2) FROM reviews WHERE book_id=:book_id"
     result = db.session.execute(text(sql), {"book_id":book_id})
     avg = result.scalar()
