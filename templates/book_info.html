@@ -1,5 +1,7 @@
 <title>Book DB: {{book.name}}</title>
 
+{% include "nav_bar.html" %}
+
 <h1> {{book.name}} </h1>
 
 {% if session.admin %}
@@ -45,7 +47,3 @@ heigth="auto"/>
 
 <hr>
 {%endfor%}
-<br>
-<form action="/">
-    <input type="submit" value="Home"/>
-</form>

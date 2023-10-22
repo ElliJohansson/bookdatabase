@@ -1,5 +1,6 @@
 <title>Book DB</title>
 
+{% include "nav_bar.html" %}
 
 <form action="/results" method="GET">
     <p>Filter search:
@@ -23,15 +24,9 @@
 
 {% if session.username %}
 <p>You are logged in as {{ session.username }}</p>
-<form action="/add_book">
-    <input type="submit" value="Add book"/>
-</form>
-<form action="/logout">
-    <input type="submit" value="Log out"/>
-</form>
 
 {% else %}
-<p><a href="/login">Log in</a> or <a href="/register">register</a> to add a book.</p> 
+<p>Log in or register to add a book.</p> 
 {% endif %}
 
 

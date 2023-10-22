@@ -1,9 +1,12 @@
 <title>Book DB</title>
 
+{% include "nav_bar.html" %}
+
 <form action="/results" method="GET">
     <p>Filter search:
         <input type="checkbox" name="search_option" value="name"> title
         <input type="checkbox" name="search_option" value="synopsis"> synopsis
+
     </p>
     <input type="submit" value="Search">
     <input type="text" name="query">
@@ -16,9 +19,3 @@
 <a href="/book/{{result}}">{{result}}</a>
 <hr>
 {%endfor%}
-
-<br>
-
-<form action="/">
-    <input type="submit" value="Home"/>
-</form>

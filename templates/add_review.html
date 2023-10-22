@@ -1,5 +1,7 @@
 <title>Book DB</title>
 
+{% include "nav_bar.html" %}
+
 <h2>Review {{book_info.name}}</h2>
 
 <form action="/add_review/{{book_info.name}}" method="POST">
@@ -30,6 +32,8 @@
     <br>
 
     <input type="submit" value="Submit">
+
+    <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
 
 </form>
 

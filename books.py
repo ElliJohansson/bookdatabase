@@ -1,6 +1,5 @@
-from app import db
 from sqlalchemy import text
-from flask import request
+from app import db
 
 def all_books():
     sql = "SELECT name FROM books"
@@ -30,8 +29,8 @@ def add_genres(book_id, genre_id):
 def get_genres(book_id):
     sql = "SELECT G.name FROM genres G, books B, book_genres BK WHERE G.id = BK.genre_id AND B.id = BK.book_id AND B.id=:book_id"
     result = db.session.execute(text(sql), {"book_id":book_id})
-    genres = [row[0] for row in result.fetchall()]
-    return genres
+    book_genres = [row[0] for row in result.fetchall()]
+    return book_genres
 
 def search(query, search_option):
     if len(search_option)==1:

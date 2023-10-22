@@ -19,6 +19,7 @@ def add_book():
         return render_template("add_book.html", genre_list=genre_list)
     
     if request.method == "POST":
+        users.csrf_check()
         name = request.form["name"]
         year = request.form["year"]
         author = request.form["author"]
@@ -27,7 +28,6 @@ def add_book():
 
         cover = request.files ["cover"]
 
-        print(type(year))
         if not year.isnumeric():
             error = "Publication year must be a number."
             return render_template("add_book.html", error=error, genre_list=genre_list)
@@ -139,6 +139,7 @@ def add_review(name):
         return render_template("add_review.html", book_info=book_info)
     
     if request.method == "POST":
+        users.csrf_check()
         rating = int(request.form["rating"])
         review = request.form["review"]
 
