@@ -2,7 +2,7 @@
 
 The site is used to store and sort through information about books.
 
-### Features at the moment
+### Features
 
 - Users can create new accounts and log in
 - Logged in users can add books to the site (title, publication year, author, synopsis, genre(s), cover art)
@@ -12,11 +12,6 @@ The site is used to store and sort through information about books.
 - Admins can remove reviews from the site
 - Logged in users can review books on the site (rating & written review)
 - Users can view individual ratings and reviews, as well as the average rating, on the book's site
-  
-### Features
-
-- Users can sort the books by rating
-- Users can filter the books by genre
 
 ### Test in production
 
