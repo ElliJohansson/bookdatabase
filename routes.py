@@ -33,7 +33,7 @@ def add_book():
             return render_template("add_book.html", error=error, genre_list=genre_list)
 
         if cover.filename != "":
-            upload_folder = "static"
+            upload_folder = "./static/book_covers"
             os.makedirs(upload_folder, exist_ok=True)
 
             filename = secure_filename(cover.filename)

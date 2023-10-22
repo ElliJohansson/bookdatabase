@@ -1,21 +1,28 @@
+<body>
 <nav>
     <ul>
         <li><a href="/">Home</a></li>
         {% if session.username %}
         <li><a href="/add_book">Add book</a></li>
-        <li><a href="/logout">Log out</a></li>
+        <div class="right-nav">
+            <li><a href="/logout">Log out</a></li>
+        </div>
         {% else %}
-        <li><a href="/login">Log in</a></li>
-        <li><a href="/register">Register</a></li>
+            <div class="right-nav">
+                <li><a href="/login">Log in</a></li>
+                <li><a href="/register">Register</a></li>
+            </div>
         {% endif %}
-        <form action="/results" method="GET">
-            <p>Filter search:
-                <input type="checkbox" name="search_option" value="name"> title
-                <input type="checkbox" name="search_option" value="synopsis"> synopsis
-            </p>
-            <input type="submit" value="Search">
-            <input type="text" name="query">
-            
-        </form>
     </ul>
+
+    <form id="search" action="/results" method="GET">
+        <p>Filter search:
+            <input type="checkbox" name="search_option" value="name"> title
+            <input type="checkbox" name="search_option" value="synopsis"> synopsis
+        </p>
+        <input type="submit" value="Search">
+        <input type="text" name="query">
+    </form>
+
 </nav>
+</body>

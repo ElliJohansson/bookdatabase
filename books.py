@@ -76,5 +76,4 @@ def average_rating(book_id):
     result = db.session.execute(text(sql), {"book_id":book_id})
     avg = result.scalar()
     return str(avg)
-
     

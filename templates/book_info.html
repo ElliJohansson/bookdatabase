@@ -1,6 +1,16 @@
+<link rel="stylesheet" href="../static/css/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
 <title>Book DB: {{book.name}}</title>
 
+<div class="header">
+    <h2>Book Database</h2>
+  </div>
+
 {% include "nav_bar.html" %}
+
+<div class="content">
 
 <h1> {{book.name}} </h1>
 
@@ -12,43 +22,56 @@
 <br>
 {% endif %}
 
-<img src="/{{book.cover}}" alt="{{book.name}} Cover"
-width="20%"
-heigth="auto"/>
 
-<p><b> Publication year:</b> {{book.year}}</p>
-<p><b> Author:</b> {{book.author}}</p>
-<p><b> Genre(s):</b> {{ ', '.join(genres) }}</p>
-
-
-<p><b> Synopsis:</b><br>
-{{book.synopsis}}</p>
-
-{%if average_rating != 0 %}
-<h3>Average rating: {{average_rating}}/5</h3>
-{%else%}
-<h3>Average rating:</h3>
-<p>This book hasn't been reviewed yet.</p>
-{%endif%}
-
-{% if session.username %}
-<form action="/add_review/{{book.name}}">
-    <input type="submit" value="Leave a review"/>
-</form>
-
-{% endif %}
+<div class="container">
+    <div class="image">
+        <img src="/{{book.cover}}" alt="Image Not Found" onerror="this.onerror=null;this.src='/static/images/book_cover.png';">
+    </div>
+    <div class="info">
+        <p><b> Publication year:</b> {{book.year}}</p>
+        <p><b> Author:</b> {{book.author}}</p>
+        <p><b> Genre(s):</b> {{ ', '.join(genres) }}</p>
+        <p><b> Synopsis:</b><br>
+            {{book.synopsis}}</p>
+    </div>
+</div>
 
 
-<hr>
-{% for review in reviews %}
-<p><b>Rating:</b> {{review.rating}}/5</p>
-<p><b>Review:</b> {{review.review}}</p>
-<p>- {{review.username}}</p>
-{% if session.admin %}
-<form action="/delete_review" method="POST">
-    <input type="hidden" value="{{review.id}}" name="id">
-    <input type="submit" value="Delete review"></form>
-{% endif %}
+<div class="review_container">
+    <div class="avg_rating">
+        {%if average_rating != 0 %}
+        <h3>Average rating: {{average_rating}}/5</h3>
+        {%else%}
+        <h3>Average rating:</h3>
+        <p>This book hasn't been reviewed yet.</p>
+        {%endif%}
+    </div>
 
-<hr>
-{%endfor%}
+    <div class="review_button">
+        {% if session.username %}
+        <form action="/add_review/{{book.name}}">
+            <input type="submit" value="Leave a review"/>
+        </form>
+
+        {% endif %}
+    </div>
+</div>
+
+<div class="reviews">
+    <hr>
+    {% for review in reviews %}
+    <p><b>Rating:</b> {{review.rating}}/5</p>
+    <p><b>Review:</b> {{review.review}}</p>
+    <p>- {{review.username}}</p>
+    {% if session.admin %}
+    <form action="/delete_review" method="POST">
+        <input type="hidden" value="{{review.id}}" name="id">
+        <input type="submit" value="Delete review"></form>
+    {% endif %}
+
+    <hr>
+    {%endfor%}
+</div>
+</div>
+
+</body>

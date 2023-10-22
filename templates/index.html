@@ -1,8 +1,18 @@
+<link rel="stylesheet" href="../static/css/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
 <title>Book DB</title>
 
+<div class="header">
+    <h2>Book Database</h2>
+  </div>
+
+  
 {% include "nav_bar.html" %}
-    
-<hr>
+
+<div class="content">
+
 
 {%for book in books%}
 <a href="/book/{{book.name}}">{{book.name}}</a>
@@ -13,12 +23,10 @@
 <p>
 
 {% if session.username %}
-<p>You are logged in as {{ session.username }}</p>
+<p>You are logged in as <b>{{ session.username }}</b></p>
 
 {% else %}
 <p>Log in or register to add a book.</p> 
 {% endif %}
-
-
-
-
+</div>
+</body>
