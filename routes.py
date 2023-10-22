@@ -91,7 +91,6 @@ def login():
 def logout():
     del session["username"]
     if "admin" in session:
-        print("test")
         del session["admin"]
 
     return redirect("/")
