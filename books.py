@@ -65,6 +65,11 @@ def get_reviews(book_id):
     reviews = result.fetchall()
     return reviews
 
+def delete_review(id):
+    sql = "DELETE FROM reviews WHERE id=:id"
+    db.session.execute(text(sql), {"id":id})
+    db.session.commit()
+
 def average_rating(book_id):
     print(book_id)
     sql = "SELECT ROUND(AVG(rating), 2) FROM reviews WHERE book_id=:book_id"

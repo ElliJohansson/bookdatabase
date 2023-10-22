@@ -44,6 +44,11 @@ heigth="auto"/>
 <p><b>Rating:</b> {{review.rating}}/5</p>
 <p><b>Review:</b> {{review.review}}</p>
 <p>- {{review.username}}</p>
+{% if session.admin %}
+<form action="/delete_review" method="POST">
+    <input type="hidden" value="{{review.id}}" name="id">
+    <input type="submit" value="Delete review"></form>
+{% endif %}
 
 <hr>
 {%endfor%}

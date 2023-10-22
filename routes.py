@@ -132,6 +132,12 @@ def delete():
     books.delete_book(id)
     return redirect("/")
 
+@app.route("/delete_review", methods=["POST"])
+def delete_review():
+    id = request.form["id"]
+    books.delete_review(id)
+    return redirect(request.referrer)
+
 @app.route("/add_review/<name>", methods=["GET", "POST"])
 def add_review(name):
     book_info = books.book(name)
