@@ -5,12 +5,14 @@ entrypoint2==1.1
 Flask==2.3.3
 Flask-SQLAlchemy==3.1.1
 greenlet==2.0.2
+gunicorn==21.2.0
 itsdangerous==2.1.2
 jeepney==0.8.0
 Jinja2==3.1.2
 MarkupSafe==2.1.3
 MouseInfo==0.1.3
 mss==9.0.1
+packaging==23.2
 Pillow==10.0.1
 psycopg2==2.9.7
 PyAutoGUI==0.9.54
