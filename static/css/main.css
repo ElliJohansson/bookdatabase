@@ -76,6 +76,7 @@ img {
   
   .info {
     padding-left: 20px;
+    white-space: pre-line;
   }
 
   .review_container {
@@ -96,6 +97,7 @@ img {
     background: rgb(150, 144, 140);
     padding: 0em 1em;
     border-radius: .5em;
+    white-space: pre-line;
   }
 
   #synopsis_chr_limit {
